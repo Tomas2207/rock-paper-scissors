@@ -3,17 +3,15 @@ let computerPlay = function () {
   return options[Math.floor(Math.random() * options.length)];
 };
 
-let playerPlay = function () {
-  let choice = prompt("Type Rock, Paper or Scissors");
-  choice = choice.toLowerCase();
+let playerPlay = function (choice) {
   switch (choice) {
-    case "rock":
+    case "1":
       return "rock";
       break;
-    case "paper":
+    case "2":
       return "paper";
       break;
-    case "scissors":
+    case "3":
       return "scissors";
       break;
 
@@ -28,7 +26,8 @@ let round = function (f1, f2) {
     (f1 === "paper" && f2 === "rock") ||
     (f1 === "rock" && f2 === "scissors")
   ) {
-    console.log(`The player wins, ${f1} beats ${f2}`);
+    const choice = document.querySelector("#choice");
+    choice.textContent = `The player wins, ${f1} beats ${f2}`;
 
     return 1;
   } else if (
@@ -36,32 +35,42 @@ let round = function (f1, f2) {
     (f2 === "paper" && f1 === "rock") ||
     (f2 === "rock" && f1 === "scissors")
   ) {
-    console.log(`The PC wins, ${f2} beats ${f1}`);
+    const choice = document.querySelector("#choice");
+    choice.textContent = `The PC wins, ${f2} beats ${f1}`;
 
     return 2;
   } else {
-    console.log("It's a TIE!!");
+    const choice = document.querySelector("#choice");
+    choice.textContent = "It's a TIE!!";
 
     return 3;
   }
 };
 
-let game = function (f, f1, f2) {
-  let playerScore = 0;
-  let computerScore = 0;
+// let game = function (f, f1, f2) {
+//   let playerScore = 0;
+//   let computerScore = 0;
 
-  for (let i = 1; i <= 5; i++) {
-    console.log(`round ${i}`);
-    let outcome = f(f1(), f2());
+//   for (let i = 1; i <= 5; i++) {
+//     console.log(`round ${i}`);
+//     let outcome = f(f1(), f2());
 
-    if (outcome === 1) {
-      playerScore++;
-    } else if (outcome === 2) {
-      computerScore++;
-    }
-  }
+//     if (outcome === 1) {
+//       playerScore++;
+//     } else if (outcome === 2) {
+//       computerScore++;
+//     }
+//   }
 
-  console.log(`Final score: Player: ${playerScore} Computer: ${computerScore}`);
-};
+//   console.log(`Final score: Player: ${playerScore} Computer: ${computerScore}`);
+// };
 
-game(round, playerPlay, computerPlay);
+// game(round, playerPlay, computerPlay);
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let outcome = round(playerPlay(button.id), computerPlay());
+  });
+});
