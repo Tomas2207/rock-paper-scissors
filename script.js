@@ -47,30 +47,56 @@ let round = function (f1, f2) {
   }
 };
 
-// let game = function (f, f1, f2) {
-//   let playerScore = 0;
-//   let computerScore = 0;
+let playerScore = 0;
+let computerScore = 0;
 
-//   for (let i = 1; i <= 5; i++) {
-//     console.log(`round ${i}`);
-//     let outcome = f(f1(), f2());
+let checkWins = function (winner) {
+  if (winner === 1) {
+    playerScore += 1;
+    const score = document.querySelector("#score");
+    score.textContent = `Score: ${playerScore}`;
+  } else if (winner === 2) {
+    computerScore += 1;
+    const pcScore = document.querySelector("#pc-score");
+    pcScore.textContent = `Score: ${computerScore}`;
+  }
+  console.log("player: " + playerScore, "COmputer: " + computerScore);
 
-//     if (outcome === 1) {
-//       playerScore++;
-//     } else if (outcome === 2) {
-//       computerScore++;
-//     }
-//   }
+  if (playerScore === 5) {
+    const choice = document.querySelector("#choice");
+    choice.textContent = "PLAYER 1 WINS!!";
+  } else if (computerScore === 5) {
+    const choice = document.querySelector("#choice");
+    choice.textContent = "THE COMPUTER WINS :(";
+  }
+};
 
-//   console.log(`Final score: Player: ${playerScore} Computer: ${computerScore}`);
-// };
-
-// game(round, playerPlay, computerPlay);
+let reset = function () {
+  playerScore = 0;
+  computerScore = 0;
+  const score = document.querySelector("#score");
+  score.textContent = `Score: ${playerScore}`;
+  const pcScore = document.querySelector("#pc-score");
+  pcScore.textContent = `Score: ${computerScore}`;
+  const choice = document.querySelector("#choice");
+  choice.textContent = "";
+};
 
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    let outcome = round(playerPlay(button.id), computerPlay());
+    if (playerScore >= 5 || computerScore >= 5) {
+      const choice = document.querySelector("#choice");
+      choice.textContent = "RESET to play again";
+    } else {
+      checkWins(round(playerPlay(button.id), computerPlay()));
+    }
   });
+});
+
+const reseter = document.querySelector(".reset");
+
+reseter.addEventListener("click", () => {
+  reset();
 });

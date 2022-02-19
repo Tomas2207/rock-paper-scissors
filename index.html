@@ -9,20 +9,26 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>ROCK, PAPER, SCISSORS</h1>
+    <header><h1>ROCK, PAPER, SCISSORS</h1></header>
     <div class="game-container">
       <div id="player-1">
         <h2>Player 1</h2>
-        <button id="1">Rock</button>
-        <button id="2">Paper</button>
-        <button id="3">Scissors</button>
+        <button id="1"><img src="images/rock.png" alt="rock" /></button>
+        <button id="2"><img src="images/paper.png" alt="paper" /></button>
+        <button id="3"><img src="images/scissors.png" alt="scissors" /></button>
+        <div class="score-container"><div id="score">Score:</div></div>
       </div>
-      <div>
+      <div id="result">
         <h2>Result</h2>
         <div id="choice"></div>
+        <button class="reset">Reset</button>
       </div>
       <div>
         <h2>Computer</h2>
+        <img src="images/rock.png" alt="rock" />
+        <img src="images/paper.png" alt="paper" />
+        <img src="images/scissors.png" alt="scissors" />
+        <div class="score-container"><div id="pc-score">Score:</div></div>
       </div>
     </div>
   </body>
