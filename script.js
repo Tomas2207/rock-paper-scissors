@@ -27,7 +27,7 @@ let round = function (f1, f2) {
     (f1 === "rock" && f2 === "scissors")
   ) {
     const choice = document.querySelector("#choice");
-    choice.textContent = `The player wins, ${f1} beats ${f2}`;
+    choice.textContent = `PLAYER + 1`;
 
     return 1;
   } else if (
@@ -36,12 +36,12 @@ let round = function (f1, f2) {
     (f2 === "rock" && f1 === "scissors")
   ) {
     const choice = document.querySelector("#choice");
-    choice.textContent = `The PC wins, ${f2} beats ${f1}`;
+    choice.textContent = `PC + 1`;
 
     return 2;
   } else {
     const choice = document.querySelector("#choice");
-    choice.textContent = "It's a TIE!!";
+    choice.textContent = "TIE";
 
     return 3;
   }
@@ -80,6 +80,10 @@ let reset = function () {
   pcScore.textContent = `Score: ${computerScore}`;
   const choice = document.querySelector("#choice");
   choice.textContent = "";
+  const playerChoice = document.querySelector("#player-choice");
+  playerChoice.textContent = "";
+  const computerChoice = document.querySelector("#pc-choice");
+  computerChoice.textContent = "";
 };
 
 const buttons = document.querySelectorAll("button");
@@ -90,7 +94,13 @@ buttons.forEach((button) => {
       const choice = document.querySelector("#choice");
       choice.textContent = "RESET to play again";
     } else {
-      checkWins(round(playerPlay(button.id), computerPlay()));
+      let player = playerPlay(button.id);
+      let computer = computerPlay();
+      checkWins(round(player, computer));
+      const playerChoice = document.querySelector("#player-choice");
+      playerChoice.textContent = player.toUpperCase();
+      const computerChoice = document.querySelector("#pc-choice");
+      computerChoice.textContent = computer.toUpperCase();
     }
   });
 });
